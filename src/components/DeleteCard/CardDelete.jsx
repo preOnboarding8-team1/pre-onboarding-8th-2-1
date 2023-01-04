@@ -16,9 +16,7 @@ export default CardDelete;
 const DeleteBtn = styled.button`
   padding: 0;
   border: 0;
-  font-size: 0.5rem;
-  width: 10px;
-  height: 10px;
+  font-size: 1rem;
   background-color: transparent;
   cursor: pointer;
 `;
