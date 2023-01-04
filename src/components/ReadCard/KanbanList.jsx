@@ -1,9 +1,13 @@
 import styled from 'styled-components';
+import Card from './Card';
 
-const KanbanList = ({ title }) => {
+const KanbanList = ({ title, cards }) => {
   return (
     <KanbanListWrap>
       <KanbanListTitle>{title}</KanbanListTitle>
+      {cards.map((card) => (
+        <Card key={card.id} title={card.title} card={card} />
+      ))}
     </KanbanListWrap>
   );
 };

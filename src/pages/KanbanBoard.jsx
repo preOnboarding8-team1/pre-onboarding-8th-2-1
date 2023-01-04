@@ -1,12 +1,22 @@
 import styled from 'styled-components';
+import { useRecoilValue } from 'recoil';
+import { useLayoutEffect } from 'react';
+import { kanbanListState } from '../atoms/atom';
 import KanbanList from '../components/ReadCard/KanbanList';
+import TaskAdd from '../components/CreateCard/TaskAdd';
+import { addLocalStorage } from '../utils/saveTask';
 
 const KanbanBoard = () => {
+  const kanbanList = useRecoilValue(kanbanListState);
   const TITLE_NAME = {
     TO_DO: '할 일',
     IN_PROGRESS: '진행 중',
     DONE: '완료',
   };
+
+  useLayoutEffect(() => {
+    addLocalStorage(kanbanList);
+  }, [kanbanList]);
 
   return (
     <>
@@ -14,10 +24,14 @@ const KanbanBoard = () => {
         <MainTitle>KANBAN BOARD</MainTitle>
       </MainHeader>
       <KanbanContainer>
-        <KanbanList title={TITLE_NAME.TO_DO} />
-        <KanbanList title={TITLE_NAME.IN_PROGRESS} />
-        <KanbanList title={TITLE_NAME.DONE} />
+        <KanbanList title={TITLE_NAME.TO_DO} cards={kanbanList.filter((card) => card.category === TITLE_NAME.TO_DO)} />
+        <KanbanList
+          title={TITLE_NAME.IN_PROGRESS}
+          cards={kanbanList.filter((card) => card.title === TITLE_NAME.IN_PROGRESS)}
+        />
+        <KanbanList title={TITLE_NAME.DONE} cards={kanbanList.filter((card) => card.title === TITLE_NAME.DONE)} />
       </KanbanContainer>
+      <TaskAdd />
     </>
   );
 };
