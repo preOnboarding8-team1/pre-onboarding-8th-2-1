@@ -1,17 +1,10 @@
 import styled from 'styled-components';
-import { useRecoilState } from 'recoil';
 import { useState } from 'react';
 import UpdateForm from '../UpdateCard/UpdateForm';
-import { kanbanListState } from '../../atoms/atom';
+import CardDelete from '../DeleteCard/CardDelete';
 
 const Card = ({ card }) => {
-  const [taskList, setTaskList] = useRecoilState(kanbanListState);
   const [updateModal, setUpdateModal] = useState(false);
-
-  const handleCardDelete = (event) => {
-    const targetId = parseInt(event.target.closest('section').dataset.id, 10);
-    setTaskList(taskList.filter((task) => task.id !== targetId));
-  };
 
   const handleCardUpdate = (event) => {
     if (event.target.localName === 'button') {
@@ -25,7 +18,7 @@ const Card = ({ card }) => {
       <CardContentBox>
         <CardCategory>{card.state}</CardCategory>
         <CardContent>{card.title}</CardContent>
-        <DeleteBtn onClick={handleCardDelete}>X</DeleteBtn>
+        <CardDelete />
       </CardContentBox>
       {updateModal && <UpdateForm card={card} setUpdateModal={setUpdateModal} />}
     </CardContainer>
@@ -74,14 +67,4 @@ const CardContent = styled.p`
   overflow: hidden;
   text-overflow: ellipsis;
   color: black;
-`;
-
-const DeleteBtn = styled.button`
-  padding: 0;
-  border: 0;
-  font-size: 0.5rem;
-  width: 10px;
-  height: 10px;
-  background-color: transparent;
-  cursor: pointer;
 `;
