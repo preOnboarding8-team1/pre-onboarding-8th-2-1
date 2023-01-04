@@ -1,23 +1,49 @@
 import styled from 'styled-components';
+import { useRecoilState } from 'recoil';
+import { useLayoutEffect } from 'react';
+import { stateDropdown } from '../../atoms/atom';
 
-const StateDropdown = ({ setStateDrop }) => {
+const StateDropdown = ({ card }) => {
+  const [, setStateDropDown] = useRecoilState(stateDropdown);
   const handleStateSelect = (event) => {
     const currentTarget = event.target;
     if (currentTarget.localName === 'li') {
-      const options = document.querySelectorAll('.taskStateOption');
+      const options = document.querySelectorAll('li');
       options.forEach((option) => {
         option.style = 'background-color: white';
       });
       currentTarget.style = 'background-color: #70bbf7';
-      setStateDrop(currentTarget.innerText);
+      setStateDropDown(currentTarget.innerText);
     }
   };
 
+  const handleStateColor = () => {
+    switch (card.state) {
+      case '할 일': {
+        document.querySelector('.taskTodo').style = 'background-color: #70bbf7';
+        break;
+      }
+      case '진행 중': {
+        document.querySelector('.taskProgress').style = 'background-color: #70bbf7';
+        break;
+      }
+      case '완료': {
+        document.querySelector('.taskDone').style = 'background-color: #70bbf7';
+        break;
+      }
+      default:
+    }
+  };
+
+  useLayoutEffect(() => {
+    card && handleStateColor();
+  }, []);
+
   return (
     <DropdownContainer onClick={handleStateSelect}>
-      <OptionSelectBox className="taskStateOption">할 일</OptionSelectBox>
-      <OptionSelectBox className="taskStateOption">진행 중</OptionSelectBox>
-      <OptionSelectBox className="taskStateOption">완료</OptionSelectBox>
+      <OptionSelectBox className="taskTodo">할 일</OptionSelectBox>
+      <OptionSelectBox className="taskProgress">진행 중</OptionSelectBox>
+      <OptionSelectBox className="taskDone">완료</OptionSelectBox>
     </DropdownContainer>
   );
 };

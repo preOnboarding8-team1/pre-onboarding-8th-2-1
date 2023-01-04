@@ -1,22 +1,33 @@
 import styled from 'styled-components';
 import { useRecoilState } from 'recoil';
+import { useState } from 'react';
+import UpdateForm from '../UpdateCard/UpdateForm';
 import { kanbanListState } from '../../atoms/atom';
 
 const Card = ({ card }) => {
   const [taskList, setTaskList] = useRecoilState(kanbanListState);
+  const [updateModal, setUpdateModal] = useState(false);
 
   const handleCardDelete = (event) => {
     const targetId = parseInt(event.target.closest('section').dataset.id, 10);
     setTaskList(taskList.filter((task) => task.id !== targetId));
   };
 
+  const handleCardUpdate = (event) => {
+    if (event.target.localName === 'button') {
+      return;
+    }
+    setUpdateModal(true);
+  };
+
   return (
-    <CardContainer data-id={card.id}>
+    <CardContainer data-id={card.id} onClick={handleCardUpdate}>
       <CardContentBox>
         <CardCategory>{card.state}</CardCategory>
         <CardContent>{card.title}</CardContent>
         <DeleteBtn onClick={handleCardDelete}>X</DeleteBtn>
       </CardContentBox>
+      {updateModal && <UpdateForm card={card} setUpdateModal={setUpdateModal} />}
     </CardContainer>
   );
 };

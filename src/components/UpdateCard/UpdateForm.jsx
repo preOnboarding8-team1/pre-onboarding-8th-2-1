@@ -2,31 +2,34 @@ import styled from 'styled-components';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { useLayoutEffect } from 'react';
 import { kanbanListState, managerSelect, stateDropdown } from '../../atoms/atom';
-import Search from './Search';
-import StateDropdown from './StateDropdown';
+import Search from '../CreateCard/Search';
+import StateDropdown from '../CreateCard/StateDropdown';
 
-const AddForm = ({ setOpenAddForm }) => {
+const UpdateForm = ({ card, setUpdateModal }) => {
   const [kanbanList, setKanbanList] = useRecoilState(kanbanListState);
-  const stateDrop = useRecoilValue(stateDropdown);
   const [currentManager, setCurrentManager] = useRecoilState(managerSelect);
-  const getId = kanbanList.length > 0 ? kanbanList[kanbanList.length - 1].id + 1 : 0;
+  const stateDrop = useRecoilValue(stateDropdown);
 
-  const handleTaskAdd = () => {
+  const handleTaskUpdate = () => {
     const taskTitle = document.querySelector('.taskTitle').value;
     const taskContent = document.querySelector('.taskContent').value;
     const taskDeadline = document.querySelector('.taskDeadline').value;
-    setKanbanList((prev) => [
-      ...prev,
-      {
-        id: getId,
-        title: taskTitle,
-        content: taskContent,
-        state: stateDrop,
-        deadline: taskDeadline,
-        manager: currentManager,
-      },
-    ]);
-    setOpenAddForm(false);
+    setKanbanList(
+      kanbanList.map((task) =>
+        task.id === card.id
+          ? {
+              ...task,
+              id: card.id,
+              title: taskTitle,
+              content: taskContent,
+              state: stateDrop,
+              deadline: taskDeadline,
+              manager: currentManager,
+            }
+          : task
+      )
+    );
+    setUpdateModal(false);
   };
 
   useLayoutEffect(() => {
@@ -36,30 +39,30 @@ const AddForm = ({ setOpenAddForm }) => {
   return (
     <AddContainer>
       <AddItemBox>
-        <TaskTitle className="taskTitle" type="text" placeholder="제목" />
-        <TaskDeadline className="taskDeadline" type="datetime-local" />
+        <TaskTitle className="taskTitle" type="text" placeholder="제목" defaultValue={card.title} />
+        <TaskDeadline className="taskDeadline" type="datetime-local" defaultValue={card.deadline} />
         <TaskManager
-          onChange={(event) => {
-            event.target.value ? setCurrentManager(event.target.value) : setCurrentManager('');
-          }}
           className="taskManager"
           type="text"
           placeholder="담당자"
+          defaultValue={currentManager}
+          onChange={(event) => setCurrentManager(event.target.value)}
         />
         {currentManager && <Search />}
+
         <TaskState className="taskState" placeholder="상태">
           상태
         </TaskState>
-        <StateDropdown />
-        <TaskContent className="taskContent" cols="30" rows="10" placeholder="내용" />
-        <TaskSaveBtn onClick={handleTaskAdd}>저장</TaskSaveBtn>
-        <TaskCancelBtn onClick={() => setOpenAddForm(false)}>취소</TaskCancelBtn>
+        <StateDropdown card={card} />
+        <TaskContent className="taskContent" cols="30" rows="10" placeholder="내용" defaultValue={card.content} />
+        <TaskSaveBtn onClick={handleTaskUpdate}>저장</TaskSaveBtn>
+        <TaskCancelBtn onClick={() => setUpdateModal(false)}>취소</TaskCancelBtn>
       </AddItemBox>
     </AddContainer>
   );
 };
 
-export default AddForm;
+export default UpdateForm;
 
 const AddContainer = styled.section`
   position: fixed;
