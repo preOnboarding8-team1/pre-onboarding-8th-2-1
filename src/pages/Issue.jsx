@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useRecoilState } from 'recoil';
 import { issuesState } from '../atoms';
+import { useDelay } from '../hooks/useDelay';
 
 import IssueList from '../components/IssueList';
 
@@ -58,29 +59,31 @@ const Issue = () => {
       }
     }
   };
+  const handleOnDragStartDelay = useDelay(handleOnDragStart);
+  const handleOnDropDelay = useDelay(handleOnDrop);
   return (
     <div>
       <IssueListContainer>
         <IssueList
           title="Todo"
           issues={todoIssues}
-          handleOnDragStart={handleOnDragStart}
+          handleOnDragStart={handleOnDragStartDelay}
           handleOnDragOver={handleOnDragOver}
-          handleOnDrop={handleOnDrop}
+          handleOnDrop={handleOnDropDelay}
         />
         <IssueList
           title="In Progress"
           issues={inProgressIssues}
-          handleOnDragStart={handleOnDragStart}
+          handleOnDragStart={handleOnDragStartDelay}
           handleOnDragOver={handleOnDragOver}
-          handleOnDrop={handleOnDrop}
+          handleOnDrop={handleOnDropDelay}
         />
         <IssueList
           title="Done"
           issues={doneIssues}
-          handleOnDragStart={handleOnDragStart}
+          handleOnDragStart={handleOnDragStartDelay}
           handleOnDragOver={handleOnDragOver}
-          handleOnDrop={handleOnDrop}
+          handleOnDrop={handleOnDropDelay}
         />
       </IssueListContainer>
     </div>

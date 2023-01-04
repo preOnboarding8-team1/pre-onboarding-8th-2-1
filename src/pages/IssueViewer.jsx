@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { useLocation, useNavigate } from 'react-router';
 import { useRecoilState } from 'recoil';
 import { issuesState } from '../atoms';
+import { useDelay } from '../hooks/useDelay';
 
 const IssueViewer = () => {
   const { state } = useLocation();
@@ -19,6 +20,8 @@ const IssueViewer = () => {
     navigate('/');
   };
 
+  const handleNavigateDelay = useDelay(handleNavigate);
+  const handleDeleteDelay = useDelay(handleDelete);
   return (
     <IssueViewerComponent>
       <Box>
@@ -32,10 +35,10 @@ const IssueViewer = () => {
         <Desc>{desc}</Desc>
 
         <div>
-          <Btn type="button" onClick={handleNavigate}>
+          <Btn type="button" onClick={handleNavigateDelay}>
             수정
           </Btn>
-          <Btn type="button" onClick={handleDelete}>
+          <Btn type="button" onClick={handleDeleteDelay}>
             삭제
           </Btn>
         </div>

@@ -1,15 +1,17 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
+import { useDelay } from '../hooks/useDelay';
 
 const IssueItem = ({ issue, handleOnDragStart }) => {
   const { assignees, title, id } = issue;
   const navigate = useNavigate();
   const handleNavigate = () => navigate(`/issue/${id}`, { state: issue });
 
+  const handleNavigateDelay = useDelay(handleNavigate);
   const titleSlice = title.length > 25 ? `${title.substring(0, 25)} ...` : title;
   return (
-    <IssueItemComponent onDragStart={() => handleOnDragStart(issue)} draggable onClick={handleNavigate}>
+    <IssueItemComponent onDragStart={() => handleOnDragStart(issue)} draggable onClick={handleNavigateDelay}>
       <IssueTitle>
         <div>{`#${id}`}</div>
         <div>{assignees ? assignees.join(', ') : <></>}</div>

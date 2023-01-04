@@ -7,6 +7,8 @@ import { AiOutlineSetting } from 'react-icons/ai';
 import { assigneesState, issuesState } from '../atoms';
 import Assignees from '../components/Assignees';
 
+import { useDelay } from '../hooks/useDelay';
+
 const IssueForm = () => {
   const STATUS_INITIAL = ['Todo', 'In Progress', 'Done'];
   const [title, setTitle] = useState('');
@@ -70,6 +72,8 @@ const IssueForm = () => {
   };
   const handleNavigateBack = () => navigate(-1);
 
+  const handleOnSubmitDelay = useDelay(handleOnSubmit);
+  const handleNavigateBackDelay = useDelay(handleNavigateBack);
   useEffect(() => {
     if (typeof state === 'object') {
       setTitle(state.title);
@@ -81,7 +85,7 @@ const IssueForm = () => {
   }, []);
 
   return (
-    <IssueFormComponent onSubmit={handleOnSubmit}>
+    <IssueFormComponent onSubmit={handleOnSubmitDelay}>
       <IssueArticle>
         <Box>
           <IssueTitleInput
@@ -91,11 +95,11 @@ const IssueForm = () => {
             value={title}
           />
           <IssueDescArea placeholder="Desc" onChange={(e) => handleOnChange(e, setDesc)} value={desc} />
-          <IssueSubmitBtn type="button" onClick={handleOnSubmit}>
+          <IssueSubmitBtn type="button" onClick={handleOnSubmitDelay}>
             {typeof state === 'object' ? '수정' : '제출'}
           </IssueSubmitBtn>
           {typeof state === 'object' && (
-            <IssueSubmitBtn type="button" onClick={handleNavigateBack}>
+            <IssueSubmitBtn type="button" onClick={handleNavigateBackDelay}>
               취소
             </IssueSubmitBtn>
           )}

@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { AiOutlineCheck } from 'react-icons/ai';
 import { useRecoilState } from 'recoil';
 import { assigneesState } from '../atoms';
+import { useDelay } from '../hooks/useDelay';
 
 const Assignees = () => {
   const INITIAL_SUGGESTIONS = ['김민상', '조정택', '박경태', '박혜정', '최승수', '오태준', '곽현', '이성헌', '조재헌'];
@@ -23,6 +24,8 @@ const Assignees = () => {
     setSuggestions(INITIAL_SUGGESTIONS.filter((v) => v.includes(e.target.value)));
   };
 
+  const handleAddAssigneesDelay = useDelay(handleAddAssignees);
+
   return (
     <AssignessComponent>
       <SuggestionsInputBox>
@@ -32,7 +35,7 @@ const Assignees = () => {
       <SuggestionsTitle>Suggestions</SuggestionsTitle>
 
       {suggestions.map((v) => (
-        <SuggestionsItem key={v} role="presentation" onClick={() => handleAddAssignees(v)}>
+        <SuggestionsItem key={v} role="presentation" onClick={() => handleAddAssigneesDelay(v)}>
           <SuggestionsCheck>{assignees.includes(v) ? <AiOutlineCheck /> : ''}</SuggestionsCheck>
           {v}
         </SuggestionsItem>
