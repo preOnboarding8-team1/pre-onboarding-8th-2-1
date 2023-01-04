@@ -1,8 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
 import IssueItem from './IssueItem';
 
 const IssueList = ({ title, issues }) => {
+  const navigate = useNavigate();
+  const handleNavigate = () => navigate('/issue/write', { state: title });
   return (
     <IssueListComponent id={title}>
       <IssueListTitle>{title}</IssueListTitle>
@@ -18,7 +21,7 @@ const IssueList = ({ title, issues }) => {
         <></>
       )}
       <IssueLastBlock id={title} className={`last ${issues.length + 1}`} />
-      <IssueAddBtn>Add Item</IssueAddBtn>
+      <IssueAddBtn onClick={handleNavigate}>Add Item</IssueAddBtn>
     </IssueListComponent>
   );
 };

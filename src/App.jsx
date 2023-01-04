@@ -5,6 +5,7 @@ import Nav from './components/Nav';
 
 const Loading = lazy(() => import('./components/Loading'));
 const IssueViewer = lazy(() => import('./pages/IssueViewer'));
+const IssueWrite = lazy(() => import('./pages/IssueWrite'));
 const Issue = lazy(() => import('./pages/Issue'));
 
 const App = () => {
@@ -25,6 +26,14 @@ const App = () => {
           element={
             <Suspense fallback={<Loading />}>
               <IssueViewer />
+            </Suspense>
+          }
+        />
+        <Route
+          path="/issue/write"
+          element={
+            <Suspense fallback={<Loading />}>
+              <IssueWrite />
             </Suspense>
           }
         />
