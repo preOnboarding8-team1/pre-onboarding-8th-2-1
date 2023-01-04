@@ -81,6 +81,8 @@ const IssueForm = () => {
       setAssigness(state.assignees);
       setDate(state.dueDate);
       setStatus(state.status);
+    } else if (typeof state === 'string') {
+      setStatus(state);
     }
   }, []);
 
