@@ -1,4 +1,5 @@
 import { RecoilRoot } from 'recoil';
+import './index.css';
 
 const App = () => {
   return (
