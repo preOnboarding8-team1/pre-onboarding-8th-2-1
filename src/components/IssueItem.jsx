@@ -1,12 +1,15 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
 
-const IssueItem = ({ issue }) => {
+const IssueItem = ({ issue, handleOnDragStart }) => {
   const { assignees, title, id } = issue;
+  const navigate = useNavigate();
+  const handleNavigate = () => navigate(`/issue/${id}`, { state: issue });
 
   const titleSlice = title.length > 25 ? `${title.substring(0, 25)} ...` : title;
   return (
-    <IssueItemComponent>
+    <IssueItemComponent onDragStart={() => handleOnDragStart(issue)} draggable onClick={handleNavigate}>
       <IssueTitle>
         <div>{`#${id}`}</div>
         <div>{assignees ? assignees.join(', ') : <></>}</div>

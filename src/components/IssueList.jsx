@@ -3,18 +3,18 @@ import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import IssueItem from './IssueItem';
 
-const IssueList = ({ title, issues }) => {
+const IssueList = ({ title, issues, handleOnDragOver, handleOnDrop, handleOnDragStart }) => {
   const navigate = useNavigate();
   const handleNavigate = () => navigate('/issue/write', { state: title });
   return (
-    <IssueListComponent id={title}>
+    <IssueListComponent onDragOver={handleOnDragOver} onDrop={handleOnDrop} id={title}>
       <IssueListTitle>{title}</IssueListTitle>
       <IssueMoveArea id={title} className="first 0" />
       {issues.length ? (
         issues.map((v, idx) => (
           <IssueItemBlock key={v.id}>
             <IssueMoveArea id={title} className={idx} />
-            <IssueItem issue={v} />
+            <IssueItem issue={v} handleOnDragStart={handleOnDragStart} />
           </IssueItemBlock>
         ))
       ) : (
