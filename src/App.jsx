@@ -1,11 +1,11 @@
-import { RecoilRoot } from 'recoil';
-import './index.css';
+import React from 'react';
+import Nav from './components/Nav';
 
 const App = () => {
   return (
-    <RecoilRoot>
-      <div>boilerplate</div>
-    </RecoilRoot>
+    <>
+      <Nav />
+    </>
   );
 };
 
