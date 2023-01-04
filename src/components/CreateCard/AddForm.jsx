@@ -1,43 +1,60 @@
 import styled from 'styled-components';
-import { useRecoilState } from 'recoil';
-import { kanbanListState } from '../../atoms/atom';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import { useLayoutEffect, useState } from 'react';
+import { kanbanListState, managerSelect, stateDropdown } from '../../atoms/atom';
+import Search from './Search';
+import StateDropdown from './StateDropdown';
 
 const AddForm = ({ setOpenAddForm }) => {
   const [kanbanList, setKanbanList] = useRecoilState(kanbanListState);
+  const [stateDrop, setStateDrop] = useRecoilState(stateDropdown);
+  const [currentManager, setCurrentManager] = useRecoilState(managerSelect);
   const getId = kanbanList.length > 0 ? kanbanList[kanbanList.length - 1].id + 1 : 0;
 
-  const handleAddTask = () => {
+  const handleTaskAdd = () => {
     const taskTitle = document.querySelector('.taskTitle').value;
     const taskContent = document.querySelector('.taskContent').value;
     const taskDeadline = document.querySelector('.taskDeadline').value;
-    const taskManager = document.querySelector('.taskManager').value;
     setKanbanList((prev) => [
       ...prev,
       {
         id: getId,
         title: taskTitle,
         content: taskContent,
-        category: '할 일',
-        isChecked: false,
+        state: stateDrop,
         deadline: taskDeadline,
-        manager: taskManager,
+        manager: currentManager,
       },
     ]);
     setOpenAddForm(false);
   };
 
-  const cancelAddForm = () => {
-    setOpenAddForm(false);
-  };
+  useLayoutEffect(() => {
+    document.querySelector('.taskManager').value = currentManager;
+  }, [currentManager]);
 
   return (
     <AddContainer>
-      <TaskTitle className="taskTitle" type="text" />
-      <TaskDeadline className="taskDeadline" type="datetime-local" />
-      <TaskManager className="taskManager" type="text" />
-      <TaskContent className="taskContent" cols="30" rows="10" />
-      <TaskSaveBtn onClick={handleAddTask}>저장</TaskSaveBtn>
-      <TaskCancelBtn onClick={cancelAddForm}>취소</TaskCancelBtn>
+      <AddItemBox>
+        <TaskTitle className="taskTitle" type="text" placeholder="제목" />
+        <TaskDeadline className="taskDeadline" type="datetime-local" />
+        <TaskManager
+          onChange={(event) => {
+            event.target.value ? setCurrentManager(event.target.value) : setCurrentManager('');
+          }}
+          className="taskManager"
+          type="text"
+          placeholder="담당자"
+        />
+        {currentManager && <Search />}
+        <TaskState className="taskState" placeholder="상태">
+          상태
+        </TaskState>
+        <StateDropdown setStateDrop={setStateDrop} />
+        <TaskContent className="taskContent" cols="30" rows="10" placeholder="내용" />
+        <TaskSaveBtn onClick={handleTaskAdd}>저장</TaskSaveBtn>
+        <TaskCancelBtn onClick={() => setOpenAddForm(false)}>취소</TaskCancelBtn>
+      </AddItemBox>
     </AddContainer>
   );
 };
@@ -54,10 +71,48 @@ const AddContainer = styled.section`
   text-align: center;
   background-color: rgba(0, 0, 0, 0.6);
 `;
-
-const TaskTitle = styled.input``;
-const TaskDeadline = styled.input``;
-const TaskManager = styled.input``;
-const TaskContent = styled.textarea``;
-const TaskSaveBtn = styled.button``;
-const TaskCancelBtn = styled.button``;
+const AddItemBox = styled.div`
+  display: flex;
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  align-items: center;
+  flex-direction: column;
+`;
+const TaskTitle = styled.input`
+  width: 30%;
+  padding: 0;
+  border: 0;
+  outline: 0;
+`;
+const TaskDeadline = styled.input`
+  width: 30%;
+  padding: 0;
+  border: 0;
+  outline: 0;
+`;
+const TaskState = styled.button`
+  width: 30%;
+  margin-top: 10px;
+`;
+const TaskManager = styled.input`
+  width: 30%;
+  margin-top: 10px;
+  padding: 0;
+  border: 0;
+  outline: 0;
+`;
+const TaskContent = styled.textarea`
+  width: 30%;
+  margin-top: 10px;
+  padding: 0;
+  border: 0;
+  outline: 0;
+`;
+const TaskSaveBtn = styled.button`
+  width: 30%;
+`;
+const TaskCancelBtn = styled.button`
+  width: 30%;
+`;

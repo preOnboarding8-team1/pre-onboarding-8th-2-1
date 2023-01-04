@@ -24,12 +24,12 @@ const KanbanBoard = () => {
         <MainTitle>KANBAN BOARD</MainTitle>
       </MainHeader>
       <KanbanContainer>
-        <KanbanList title={TITLE_NAME.TO_DO} cards={kanbanList.filter((card) => card.category === TITLE_NAME.TO_DO)} />
+        <KanbanList title={TITLE_NAME.TO_DO} cards={kanbanList.filter((card) => card.state === TITLE_NAME.TO_DO)} />
         <KanbanList
           title={TITLE_NAME.IN_PROGRESS}
-          cards={kanbanList.filter((card) => card.title === TITLE_NAME.IN_PROGRESS)}
+          cards={kanbanList.filter((card) => card.state === TITLE_NAME.IN_PROGRESS)}
         />
-        <KanbanList title={TITLE_NAME.DONE} cards={kanbanList.filter((card) => card.title === TITLE_NAME.DONE)} />
+        <KanbanList title={TITLE_NAME.DONE} cards={kanbanList.filter((card) => card.state === TITLE_NAME.DONE)} />
       </KanbanContainer>
       <TaskAdd />
     </>

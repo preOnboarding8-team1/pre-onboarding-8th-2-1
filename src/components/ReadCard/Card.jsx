@@ -13,8 +13,8 @@ const Card = ({ card }) => {
   return (
     <CardContainer data-id={card.id}>
       <CardContentBox>
-        <CardCategory>todo</CardCategory>
-        <CardContent>h1</CardContent>
+        <CardCategory>{card.state}</CardCategory>
+        <CardContent>{card.title}</CardContent>
         <DeleteBtn onClick={handleCardDelete}>X</DeleteBtn>
       </CardContentBox>
     </CardContainer>
@@ -33,7 +33,6 @@ const CardContainer = styled.section`
   border-radius: 7px;
   background-color: white;
   box-shadow: 1px 1px 5px 0.1px rgba(0, 0, 0, 0.15);
-  cursor: pointer;
 `;
 
 const CardContentBox = styled.div`
@@ -73,4 +72,5 @@ const DeleteBtn = styled.button`
   width: 10px;
   height: 10px;
   background-color: transparent;
+  cursor: pointer;
 `;
