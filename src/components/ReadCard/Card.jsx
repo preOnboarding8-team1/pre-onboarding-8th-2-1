@@ -19,14 +19,16 @@ const Card = ({ card }) => {
   };
 
   return (
-    <CardContainer data-id={card.id} onDragStart={handleDragStart} draggable>
-      <CardContentBox onClick={handleCardUpdate}>
-        <CardCategory>{card.state}</CardCategory>
-        <CardContent>{card.title}</CardContent>
-        <CardDelete />
-      </CardContentBox>
+    <>
+      <CardContainer data-id={card.id} onDragStart={handleDragStart} draggable>
+        <CardContentBox onClick={handleCardUpdate}>
+          <CardCategory>{card.state}</CardCategory>
+          <CardContent>{card.title}</CardContent>
+          <CardDelete />
+        </CardContentBox>
+      </CardContainer>
       {updateModal && <UpdateForm card={card} setUpdateModal={setUpdateModal} />}
-    </CardContainer>
+    </>
   );
 };
 

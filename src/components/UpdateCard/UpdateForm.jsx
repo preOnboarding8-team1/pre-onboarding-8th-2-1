@@ -37,8 +37,8 @@ const UpdateForm = ({ card, setUpdateModal }) => {
   }, [currentManager]);
 
   return (
-    <AddContainer>
-      <AddItemBox>
+    <UpdateContainer>
+      <UpdateItemBox>
         <TaskTitle className="taskTitle" type="text" placeholder="제목" defaultValue={card.title} />
         <TaskDeadline className="taskDeadline" type="datetime-local" defaultValue={card.deadline} />
         <TaskManager
@@ -57,14 +57,14 @@ const UpdateForm = ({ card, setUpdateModal }) => {
         <TaskContent className="taskContent" cols="30" rows="10" placeholder="내용" defaultValue={card.content} />
         <TaskSaveBtn onClick={handleTaskUpdate}>저장</TaskSaveBtn>
         <TaskCancelBtn onClick={() => setUpdateModal(false)}>취소</TaskCancelBtn>
-      </AddItemBox>
-    </AddContainer>
+      </UpdateItemBox>
+    </UpdateContainer>
   );
 };
 
 export default UpdateForm;
 
-const AddContainer = styled.section`
+const UpdateContainer = styled.section`
   position: fixed;
   top: 0;
   right: 0;
@@ -74,7 +74,7 @@ const AddContainer = styled.section`
   text-align: center;
   background-color: rgba(0, 0, 0, 0.6);
 `;
-const AddItemBox = styled.div`
+const UpdateItemBox = styled.div`
   display: flex;
   position: relative;
   top: 50%;
