@@ -1,3 +1,5 @@
+<<<<<<< HEAD
+
 # 원티드 프리온보딩 8th - 1주차 과제
 
 [![React Version](https://img.shields.io/badge/React-v18.2.0-blue)](https://ko.reactjs.org/)
@@ -11,8 +13,7 @@
 
 ### 📢 배포 링크
 
-> http://issuetracking-wanted.s3-website.ap-northeast-2.amazonaws.com/
-> <br />
+> http://issuetracking-wanted.s3-website.ap-northeast-2.amazonaws.com/ > <br />
 
 ## 📚 목차
 
@@ -135,8 +136,7 @@
 
 ### Notion
 
-> https://www.notion.so/8-1-e616fa02748b428ebd94686ac7607fd7
-> <br />
+> https://www.notion.so/8-1-e616fa02748b428ebd94686ac7607fd7 > <br />
 
 ## Best Practice
 
@@ -305,6 +305,5 @@ const handleDelete = () => {
           ┣ 📝Issue.jsx
           ┣ 📝IssueViewer.jsx
           ┗ 📝IssueWrite.jsx
-
 
 </details>
