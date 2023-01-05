@@ -56,6 +56,7 @@ const DropdownContainer = styled.ul`
   background-color: white;
   list-style: none;
   padding: 0;
+  cursor: pointer;
 `;
 
 const OptionSelectBox = styled.li`

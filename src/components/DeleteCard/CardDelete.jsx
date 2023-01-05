@@ -5,7 +5,7 @@ import { kanbanListState } from '../../atoms/atom';
 const CardDelete = () => {
   const [taskList, setTaskList] = useRecoilState(kanbanListState);
   const handleCardDelete = (event) => {
-    const targetId = parseInt(event.target.closest('section').dataset.id, 10);
+    const targetId = parseInt(event.target.parentElement.parentElement.dataset.id, 10);
     setTaskList(taskList.filter((task) => task.id !== targetId));
   };
 

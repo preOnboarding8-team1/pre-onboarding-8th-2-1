@@ -13,9 +13,14 @@ const Card = ({ card }) => {
     setUpdateModal(true);
   };
 
+  const handleDragStart = (event) => {
+    event.dataTransfer.setData('id', card.id);
+    event.dataTransfer.setData('title', card.title);
+  };
+
   return (
-    <CardContainer data-id={card.id} onClick={handleCardUpdate}>
-      <CardContentBox>
+    <CardContainer data-id={card.id} onDragStart={handleDragStart} draggable>
+      <CardContentBox onClick={handleCardUpdate}>
         <CardCategory>{card.state}</CardCategory>
         <CardContent>{card.title}</CardContent>
         <CardDelete />
@@ -27,7 +32,7 @@ const Card = ({ card }) => {
 
 export default Card;
 
-const CardContainer = styled.section`
+const CardContainer = styled.div`
   display: flex;
   flex-direction: column;
   position: relative;
@@ -43,7 +48,7 @@ const CardContentBox = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 20px;
+  cursor: pointer;
 `;
 
 const CardCategory = styled.div`
