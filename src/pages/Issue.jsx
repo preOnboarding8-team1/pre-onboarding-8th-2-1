@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useRecoilState } from 'recoil';
-import { issuesState } from '../atoms';
+import { issuesState, filteredIssueState } from '../atoms';
 import { useDelay } from '../hooks/useDelay';
 
 import IssueList from '../components/IssueList';
@@ -10,9 +10,7 @@ const Issue = () => {
   const [issues, setIssues] = useRecoilState(issuesState);
   const [dragItem, setDragItem] = useState({});
 
-  const todoIssues = issues.filter((v) => v.status === 'Todo');
-  const inProgressIssues = issues.filter((v) => v.status === 'In Progress');
-  const doneIssues = issues.filter((v) => v.status === 'Done');
+  const ISSUES_STATUS = ['Todo', 'In Progress', 'Done'];
 
   const handleOnDragStart = (issue) => {
     setDragItem(issue);
@@ -64,27 +62,16 @@ const Issue = () => {
   return (
     <div>
       <IssueListContainer>
-        <IssueList
-          title="Todo"
-          issues={todoIssues}
-          handleOnDragStart={handleOnDragStartDelay}
-          handleOnDragOver={handleOnDragOver}
-          handleOnDrop={handleOnDropDelay}
-        />
-        <IssueList
-          title="In Progress"
-          issues={inProgressIssues}
-          handleOnDragStart={handleOnDragStartDelay}
-          handleOnDragOver={handleOnDragOver}
-          handleOnDrop={handleOnDropDelay}
-        />
-        <IssueList
-          title="Done"
-          issues={doneIssues}
-          handleOnDragStart={handleOnDragStartDelay}
-          handleOnDragOver={handleOnDragOver}
-          handleOnDrop={handleOnDropDelay}
-        />
+        {ISSUES_STATUS.map((v) => (
+          <IssueList
+            key={v}
+            title={v}
+            issues={filteredIssueState(v)}
+            handleOnDragStart={handleOnDragStartDelay}
+            handleOnDragOver={handleOnDragOver}
+            handleOnDrop={handleOnDropDelay}
+          />
+        ))}
       </IssueListContainer>
     </div>
   );
