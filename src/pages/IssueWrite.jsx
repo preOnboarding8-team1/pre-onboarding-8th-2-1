@@ -6,7 +6,7 @@ import { useLocation } from 'react-router';
 import { AiOutlineSetting } from 'react-icons/ai';
 import { assigneesState, issuesState } from '../atoms';
 import Assignees from '../components/Assignees';
-
+import { localGetData, localSetData } from '../utils/local';
 import { useDelay } from '../hooks/useDelay';
 
 const IssueForm = () => {
@@ -46,25 +46,25 @@ const IssueForm = () => {
   };
   const handleOnSubmit = (e) => {
     e.preventDefault();
-    const issues = JSON.parse(localStorage.getItem('issues'));
+    const issues = localGetData();
     if (typeof state === 'object') {
       const patchIssue = { ...state, assignees, title, desc, dueDate: date, status };
       const newIssues = [...issues].map((v) => {
         if (v.id === state.id) return patchIssue;
         return v;
       });
-      localStorage.setItem('issues', JSON.stringify(newIssues));
+      localSetData(newIssues);
       setIssues(newIssues);
     } else if (issues) {
       const nextId = Math.max(...issues.map((v) => v.id)) + 1;
       const newIssue = { id: nextId, assignees, title, desc, dueDate: date, status };
       const newIssues = [...issues, newIssue];
-      localStorage.setItem('issues', JSON.stringify(newIssues));
+      localSetData(newIssues);
       setIssues(newIssues);
     } else {
       const newIssue = { id: 0, assignees, title, desc, dueDate: date, status };
       const newIssues = [newIssue];
-      localStorage.setItem('issues', JSON.stringify(newIssues));
+      localSetData(newIssues);
       setIssues(newIssues);
     }
     setAssigness([]);

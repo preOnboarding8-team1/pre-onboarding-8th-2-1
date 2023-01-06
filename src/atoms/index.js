@@ -1,8 +1,10 @@
 import { atom, selectorFamily } from 'recoil';
 
+import { localGetData } from '../utils/local';
+
 export const issuesState = atom({
   key: 'issuesState',
-  default: JSON.parse(localStorage.getItem('issues')) || [],
+  default: localGetData() || [],
 });
 
 export const assigneesState = atom({

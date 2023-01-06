@@ -4,6 +4,7 @@ import { useLocation, useNavigate } from 'react-router';
 import { useRecoilState } from 'recoil';
 import { issuesState } from '../atoms';
 import { useDelay } from '../hooks/useDelay';
+import { localSetData } from '../utils/local';
 
 const IssueViewer = () => {
   const { state } = useLocation();
@@ -15,7 +16,7 @@ const IssueViewer = () => {
   const handleNavigate = () => navigate('/issue/write', { state });
   const handleDelete = () => {
     const newIssues = issues.filter((v) => v.id !== id);
-    localStorage.setItem('issues', JSON.stringify(newIssues));
+    localSetData(newIssues);
     setIssues(issues.filter((v) => v.id !== id));
     navigate('/');
   };

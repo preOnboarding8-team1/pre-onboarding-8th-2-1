@@ -1,16 +1,18 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
-import { issuesState, filteredIssueState } from '../atoms';
+import { useRecoilState } from 'recoil';
+import { issuesState } from '../atoms';
 import { useDelay } from '../hooks/useDelay';
+import { localSetData } from '../utils/local';
 
 import IssueList from '../components/IssueList';
 
 const Issue = () => {
+  const ISSUES_STATUS = ['Todo', 'In Progress', 'Done'];
+  const FIRST = 'first';
+  const LAST = 'last';
   const [issues, setIssues] = useRecoilState(issuesState);
   const [dragItem, setDragItem] = useState({});
-
-  const ISSUES_STATUS = ['Todo', 'In Progress', 'Done'];
 
   const handleOnDragStart = (issue) => {
     setDragItem(issue);
@@ -24,26 +26,26 @@ const Issue = () => {
     const prevIssues = issues.filter((v) => v.status === dragItem.status);
     const prevIdx = prevIssues.indexOf(dragItem);
     prevIssues.splice(prevIdx, 1);
-    if (['Todo', 'In Progress', 'Done'].includes(e.target.id)) {
+    if (ISSUES_STATUS.includes(e.target.id)) {
       if (e.target.id !== dragItem.status) {
         const newIssue = { ...dragItem, status: e.target.id };
         const nextIssues = issues.filter((v) => v.status === newIssue.status);
 
         const another = issues.filter((v) => v.status !== newIssue.status).filter((v) => v.status !== dragItem.status);
-        if (classNames.includes('first')) {
+        if (classNames.includes(FIRST)) {
           nextIssues.unshift(newIssue);
-        } else if (classNames.includes('last')) {
+        } else if (classNames.includes(LAST)) {
           nextIssues.push(newIssue);
         } else {
           nextIssues.splice(+classNames[2], 0, newIssue);
         }
         const result = [...another, ...prevIssues, ...nextIssues];
-        localStorage.setItem('issues', JSON.stringify(result));
+        localSetData(result);
         setIssues(result);
       } else {
-        if (classNames.includes('first')) {
+        if (classNames.includes(FIRST)) {
           prevIssues.unshift(dragItem);
-        } else if (classNames.includes('last')) {
+        } else if (classNames.includes(LAST)) {
           prevIssues.push(dragItem);
         } else if (prevIdx >= +classNames[2]) {
           prevIssues.splice(+classNames[2], 0, dragItem);
@@ -52,7 +54,7 @@ const Issue = () => {
         }
         const another = issues.filter((v) => v.status !== dragItem.status);
         const result = [...another, ...prevIssues];
-        localStorage.setItem('issues', JSON.stringify(result));
+        localSetData(result);
         setIssues(result);
       }
     }
