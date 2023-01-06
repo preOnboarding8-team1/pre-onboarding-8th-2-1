@@ -224,7 +224,7 @@
 
   <br />
 
-  > 📌 form 안의 내용을 state로 관리하고, onSubmit 이벤트가 발생하면 해당 데이터로 새로운 이슈를 생성해 로컬스토리지에 저장 및 전역 상태를 업데이트 합니다.
+  > 📌 form 안의 내용을 state로 관리하고, onSubmit 이벤트가 발생하면 해당 데이터로 새로운 이슈를 생성해 로컬스토리지에 저장 및 전역 상태를 업데이트 합니다.  
   > 📌 미리 작성해둔 INITIAL_SUGGESTIONS 배열을 초기상태로 지정하고, 목록을 클릭하면 클릭한 담당자가 포함되도록 assignees state를 업데이트 합니다.
 
 ### Assignment3
@@ -249,7 +249,7 @@
 
   <br />
 
-  > 📌 개별 issue를 클릭할 경우 content 가 포함된 이슈의 상세 내용을 볼 수 있습니다.
+  > 📌 개별 issue를 클릭할 경우 content 가 포함된 이슈의 상세 내용을 볼 수 있습니다.  
   > 📌 `navigate` 를 사용하여 수정 버튼 클릭시 작성/수정 페이지로 이동합니다. `navigate`의 두 번째 인자로 현재 데이터를 전달합니다.
 
 ---
@@ -405,7 +405,7 @@ const handleDelete = () => {
   const handleOnDragStartDelay = useDelay(handleOnDragStart);
   ```
 
-  > 📌 Loading 컴포넌트를 만들어 Suspense fallback 속성으로 전달하여 delay 발생시 동작하도록 UX를 고려하여 작성했습니다.
+  > 📌 Loading 컴포넌트를 만들어 Suspense fallback 속성으로 전달하여 delay 발생시 동작하도록 UX를 고려하여 작성했습니다.  
   > 📌 `useDelay` 훅을 만들어 전달되는 함수가 0.5초 뒤에 실행되도록 하였습니다.
 
 <br />
