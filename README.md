@@ -41,7 +41,7 @@
                 </sub>
             </a>
             <br />
-            <a href="https://github.com/preOnboarding8-team1/todo-list/commits?author=hyejj19" title="Code">💻</a>
+            <a href="https://github.com/preOnboarding8-team1/pre-onboarding-8th-2-1/commits?author=hyejj19" title="Code">💻</a>
         </td>
         <td align="center">
             <a href="https://github.com/minsang98">
@@ -52,7 +52,7 @@
                 </sub>
             </a>
             <br />
-            <a href="https://github.com/preOnboarding8-team1/todo-list/commits?author=minsang98" title="Code">💻</a>
+            <a href="https://github.com/preOnboarding8-team1/pre-onboarding-8th-2-1/commits?author=minsang98" title="Code">💻</a>
         </td>
         <td align="center">
             <a href="https://github.com/kwakhyun">
@@ -63,7 +63,7 @@
                 </sub>
             </a>
             <br />
-            <a href="https://github.com/preOnboarding8-team1/todo-list/commits?author=kwakhyun" title="Code">💻</a>
+            <a href="https://github.com/preOnboarding8-team1/pre-onboarding-8th-2-1/commits?author=kwakhyun" title="Code">💻</a>
         </td>
         <td align="center">
             <a href="https://github.com/badmaniacs">
@@ -74,7 +74,7 @@
                 </sub>
             </a>
             <br />
-            <a href="https://github.com/preOnboarding8-team1/todo-list/commits?author=badmaniacs" title="Code">💻</a>
+            <a href="https://github.com/preOnboarding8-team1/pre-onboarding-8th-2-1/commits?author=badmaniacs" title="Code">💻</a>
         </td>
         <td align="center">
             <a href="https://github.com/zkzk8953">
@@ -85,7 +85,7 @@
                 </sub>
             </a>
             <br />
-            <a href="https://github.com/preOnboarding8-team1/todo-list/commits?author=zkzk8953" title="Code">💻</a>
+            <a href="https://github.com/preOnboarding8-team1/pre-onboarding-8th-2-1/commits?author=zkzk8953" title="Code">💻</a>
         </td>
         <td align="center">
             <a href="https://github.com/rewrite0w0">
@@ -96,7 +96,7 @@
                 </sub>
             </a>
             <br />
-            <a href="https://github.com/preOnboarding8-team1/todo-list/commits?author=rewrite0w0" title="Code">💻</a>
+            <a href="https://github.com/preOnboarding8-team1/pre-onboarding-8th-2-1/commits?author=rewrite0w0" title="Code">💻</a>
         </td>
         <td align="center">
             <a href="https://github.com/bigwave-cho">
@@ -107,7 +107,7 @@
                 </sub>
             </a>
             <br />
-            <a href="https://github.com/preOnboarding8-team1/todo-list/commits?author=bigwave-cho" title="Code">💻</a>
+            <a href="https://github.com/preOnboarding8-team1/pre-onboarding-8th-2-1/commits?author=bigwave-cho" title="Code">💻</a>
         </td> 
         <td align="center">
             <a href="https://github.com/JeongTaekCho">
@@ -118,7 +118,7 @@
                 </sub>
             </a>
             <br />
-            <a href="https://github.com/preOnboarding8-team1/todo-list/commits?author=JeongTaekCho" title="Code">💻</a>
+            <a href="https://github.com/preOnboarding8-team1/pre-onboarding-8th-2-1/commits?author=JeongTaekCho" title="Code">💻</a>
         </td> 
         <td align="center">
             <a href="https://github.com/aydenote">
@@ -129,7 +129,7 @@
                 </sub>
             </a>
             <br />
-            <a href="https://github.com/preOnboarding8-team1/todo-list/commits?author=aydenote" title="Code">💻</a>
+            <a href="https://github.com/preOnboarding8-team1/pre-onboarding-8th-2-1/commits?author=aydenote" title="Code">💻</a>
         </td>                 
     </tr>
 </table>
