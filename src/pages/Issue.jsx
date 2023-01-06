@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import { issuesState, filteredIssueState } from '../atoms';
 import { useDelay } from '../hooks/useDelay';
 
@@ -66,7 +66,7 @@ const Issue = () => {
           <IssueList
             key={v}
             title={v}
-            issues={filteredIssueState(v)}
+            status={v}
             handleOnDragStart={handleOnDragStartDelay}
             handleOnDragOver={handleOnDragOver}
             handleOnDrop={handleOnDropDelay}

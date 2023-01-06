@@ -1,11 +1,16 @@
 import React from 'react';
+import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import IssueItem from './IssueItem';
+import { filteredIssueState } from '../atoms';
 
-const IssueList = ({ title, issues, handleOnDragOver, handleOnDrop, handleOnDragStart }) => {
+const IssueList = ({ title, status, handleOnDragOver, handleOnDrop, handleOnDragStart }) => {
   const navigate = useNavigate();
   const handleNavigate = () => navigate('/issue/write', { state: title });
+
+  const issues = useRecoilValue(filteredIssueState(status));
+
   return (
     <IssueListComponent onDragOver={handleOnDragOver} onDrop={handleOnDrop} id={title}>
       <IssueListTitle>{title}</IssueListTitle>
