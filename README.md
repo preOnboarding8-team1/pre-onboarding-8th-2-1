@@ -3,7 +3,7 @@
 [![React Version](https://img.shields.io/badge/React-v18.2.0-blue)](https://ko.reactjs.org/)
 [![Package Manager Version](https://img.shields.io/badge/npm-v8.12.1-yellow)](https://www.npmjs.com/)
 
-원티드 프리온보딩 프론트엔드 인턴쉽 과정의 선발과제를 팀 단위로 진행 해보면서 동료학습을 경험하고 <br />이를 바탕으로 Best Practice 를 도출해내는 과제를 수행했습니다.
+"할 일", "진행 중", "완료" 세 가지 상태를 가진 이슈 트래커를 구현하고, 각자 구현된 내용을 바탕으로 바탕으로 Best Practice 를 도출해내는 과제를 수행했습니다.
 
 ### 🗓 수행 기간
 
@@ -21,6 +21,7 @@
 - [Best Practice](#best-practice)
 - [실행 방법](#실행-방법)
 - [디렉토리 구조](#디렉토리-구조)
+- [추가 구현 기능](#추가-구현-기능)
 
 <br />
 
@@ -152,10 +153,36 @@
   - 이슈는 각각 고유번호, 제목, 내용, 마감일, 상태, 담당자가 존재한다.
   - 데이터는 새로고침해도 유지될 수 있도록 관리한다.
 
-  <br />
+    <br />
 
   ```jsx
-  // atoms>index.js
+  // atom > index.js
+  export const issuesState = atom({
+    key: 'issuesState',
+    default: JSON.parse(localStorage.getItem('issues')) || [],
+    default: [],
+    effects: [localStorageEffect('issues')],
+  });
+
+  export const localStorageEffect =
+    (key) =>
+    ({ setSelf, onSet }) => {
+      const saveValue = localStorage.getItem(key);
+
+      if (saveValue != null) {
+        setSelf(JSON.parse(saveValue));
+      }
+
+      onSet((newValue, _, isReset) => {
+        isReset ? localStorage.removeItem(key) : localStorage.setItem(key, JSON.stringify(newValue));
+      });
+    };
+  ```
+
+  > 📌 전체 issues 를 localStorage에 저장하고 Recoil Atom 전역 상태로 관리합니다.  
+  > 📌 Atom Effect 를 활용해 issueState의 변경이 있을 때마다 localStorage에 접근하여 데이터를 갱신합니다. 반복해서 localStorage에 접근하는 중복 코드를 방지합니다.
+
+  ```jsx
   // issues 의 filter 메서드 추상화
   export const filteredIssueState = selectorFamily({
     key: 'filteredIssueState',
@@ -185,11 +212,10 @@
   const issues = useRecoilValue(filteredIssueState(status));
   ```
 
-  <br />
-
-  > 📌 전체 issues 를 localStorage에 저장하고 Recoil Atom 전역 상태로 관리합니다.  
   > 📌 Recoil의 selectorFamily를 활용해 filter 메서드를 추상화하여 중복된 코드를 개선했습니다.  
   > 📌 각 상태에 해당하는 배열을 filtering 한 후 List 컴포넌트에 전달합니다.
+
+  <br />
 
 ### Assignment2
 
@@ -328,49 +354,50 @@
   > 📌 이동시키고자 하는 index를 찾아 nextIssues의 배열에 dragItem을 추가합니다.  
   > 📌 전체 배열에서 nextIssues와 prevIssues를 제외한 배열을 another변수에 저장합니다.  
   > 📌 prevIssues, nextIssues, another 3개의 배열을 합쳐 Issues state에 재할당하여 Drag&Drop을 구현했습니다.
-  > <br />
 
-```jsx
-//IssueViewer
-const handleNavigate = () => navigate('/issue/write', { state })
+  <br />
 
-//IssueWrite
-const { state } = useLocation();
+  ```jsx
+  //IssueViewer
+  const handleNavigate = () => navigate('/issue/write', { state })
 
-seEffect(() => {
-    if (typeof state === 'object') {
-      setTitle(state.title);
-      setDesc(state.desc);
-      setAssigness(state.assignees);
-      setDate(state.dueDate);
-      setStatus(state.status);
-    } else if (typeof state === 'string') {
-      setStatus(state);
-    }
-  }, []);
+  //IssueWrite
+  const { state } = useLocation();
 
-// handleOnSubmit
-if (typeof state === 'object') {
-      const patchIssue = { ...state, assignees, title, desc, dueDate: date, status };
-      const newIssues = [...issues].map((v) => {
-        if (v.id === state.id) return patchIssue;
-        return v;
-      });
+  seEffect(() => {
+      if (typeof state === 'object') {
+        setTitle(state.title);
+        setDesc(state.desc);
+        setAssigness(state.assignees);
+        setDate(state.dueDate);
+        setStatus(state.status);
+      } else if (typeof state === 'string') {
+        setStatus(state);
+      }
+    }, []);
+
+  // handleOnSubmit
+  if (typeof state === 'object') {
+        const patchIssue = { ...state, assignees, title, desc, dueDate: date, status };
+        const newIssues = [...issues].map((v) => {
+          if (v.id === state.id) return patchIssue;
+          return v;
+        });
+        localStorage.setItem('issues', JSON.stringify(newIssues));
+        setIssues(newIssues);
+
+  // 삭제 코드
+  const handleDelete = () => {
+      const newIssues = issues.filter((v) => v.id !== id);
       localStorage.setItem('issues', JSON.stringify(newIssues));
-      setIssues(newIssues);
+      setIssues(issues.filter((v) => v.id !== id));
+      navigate('/');
+    };
+  ```
 
-// 삭제 코드
-const handleDelete = () => {
-    const newIssues = issues.filter((v) => v.id !== id);
-    localStorage.setItem('issues', JSON.stringify(newIssues));
-    setIssues(issues.filter((v) => v.id !== id));
-    navigate('/');
-  };
-```
-
-> 📌 write page로 이동할 때 navigate의 두번째 인자로 수정페이지와 글쓰기 페이지를 나누고 있습니다.  
-> 📌 state가 object로 들어온다면 수정 페이지를 띄우고 있습니다.  
-> 📌 수정, 삭제시 결과가 들어있는 새로운 newIssues를 localstorage에 저장하여 데이터를 보관하고 있습니다.
+  > 📌 write page로 이동할 때 navigate의 두번째 인자로 수정페이지와 글쓰기 페이지를 나누고 있습니다.  
+  > 📌 state가 object로 들어온다면 수정 페이지를 띄우고 있습니다.  
+  > 📌 수정, 삭제시 결과가 들어있는 새로운 newIssues를 localstorage에 저장하여 데이터를 보관하고 있습니다.
 
 ### Assignment5
 
@@ -407,6 +434,13 @@ const handleDelete = () => {
 
   > 📌 Loading 컴포넌트를 만들어 Suspense fallback 속성으로 전달하여 delay 발생시 동작하도록 UX를 고려하여 작성했습니다.
   > 📌 `useDelay` 훅을 만들어 전달되는 함수가 0.5초 뒤에 실행되도록 하였습니다.
+
+<br />
+
+## 추가 구현 기능
+
+> ✨ 768px, 480px 기준으로 반응형 UI 적용했습니다.  
+> ✨ Github Action 과 AWS S3 를 활용한 CI/CD 파이프라인을 구축하였습니다.
 
 <br />
 
