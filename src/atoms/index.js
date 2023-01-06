@@ -1,8 +1,23 @@
 import { atom, selectorFamily } from 'recoil';
 
+export const localStorageEffect =
+  (key) =>
+  ({ setSelf, onSet }) => {
+    const saveValue = localStorage.getItem(key);
+
+    if (saveValue != null) {
+      setSelf(JSON.parse(saveValue));
+    }
+
+    onSet((newValue, _, isReset) => {
+      isReset ? localStorage.removeItem(key) : localStorage.setItem(key, JSON.stringify(newValue));
+    });
+  };
+
 export const issuesState = atom({
   key: 'issuesState',
-  default: JSON.parse(localStorage.getItem('issues')) || [],
+  default: [],
+  effects: [localStorageEffect('issues')],
 });
 
 export const assigneesState = atom({

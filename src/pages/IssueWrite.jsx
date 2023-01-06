@@ -46,27 +46,34 @@ const IssueForm = () => {
   };
   const handleOnSubmit = (e) => {
     e.preventDefault();
-    const issues = JSON.parse(localStorage.getItem('issues'));
+
     if (typeof state === 'object') {
       const patchIssue = { ...state, assignees, title, desc, dueDate: date, status };
       const newIssues = [...issues].map((v) => {
         if (v.id === state.id) return patchIssue;
         return v;
       });
-      localStorage.setItem('issues', JSON.stringify(newIssues));
+
       setIssues(newIssues);
-    } else if (issues) {
+      setAssigness([]);
+      navigate('/');
+
+      return;
+    }
+
+    if (issues.length > 0) {
       const nextId = Math.max(...issues.map((v) => v.id)) + 1;
       const newIssue = { id: nextId, assignees, title, desc, dueDate: date, status };
       const newIssues = [...issues, newIssue];
-      localStorage.setItem('issues', JSON.stringify(newIssues));
+
       setIssues(newIssues);
     } else {
-      const newIssue = { id: 0, assignees, title, desc, dueDate: date, status };
+      const newIssue = { id: 1, assignees, title, desc, dueDate: date, status };
       const newIssues = [newIssue];
-      localStorage.setItem('issues', JSON.stringify(newIssues));
+
       setIssues(newIssues);
     }
+
     setAssigness([]);
     navigate('/');
   };
