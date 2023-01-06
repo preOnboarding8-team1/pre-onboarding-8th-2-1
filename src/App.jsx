@@ -38,6 +38,7 @@ const App = () => {
           }
         />
       </Routes>
+      <div>CI/CD TEST</div>
     </>
   );
 };
