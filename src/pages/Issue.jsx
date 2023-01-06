@@ -81,6 +81,11 @@ const IssueListContainer = styled.div`
   display: flex;
   justify-content: center;
   margin-top: 32px;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    margin-top: 64px;
+  }
 `;
 
 export default Issue;

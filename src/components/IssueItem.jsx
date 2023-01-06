@@ -22,16 +22,22 @@ const IssueItem = ({ issue, handleOnDragStart }) => {
 };
 
 const IssueItemComponent = styled.div`
+  display: flex;
+  flex-direction: column;
   width: 312px;
   height: 65px;
   padding: 5px;
   margin: 2px 0;
-  display: flex;
   background: #eee;
-  flex-direction: column;
   border-radius: 10px;
   box-sizing: border-box;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
   cursor: pointer;
+
+  @media (max-width: 768px) {
+    width: 90%;
+    margin: 2px auto;
+  }
 `;
 
 const IssueTitle = styled.div`
