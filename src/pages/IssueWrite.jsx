@@ -97,14 +97,16 @@ const IssueForm = () => {
             value={title}
           />
           <IssueDescArea placeholder="Desc" onChange={(e) => handleOnChange(e, setDesc)} value={desc} />
-          <IssueSubmitBtn type="button" onClick={handleOnSubmitDelay}>
-            {typeof state === 'object' ? '수정' : '제출'}
-          </IssueSubmitBtn>
-          {typeof state === 'object' && (
-            <IssueSubmitBtn type="button" onClick={handleNavigateBackDelay}>
-              취소
+          <IssueBtnBox>
+            <IssueSubmitBtn type="button" onClick={handleOnSubmitDelay}>
+              {typeof state === 'object' ? '수정' : '제출'}
             </IssueSubmitBtn>
-          )}
+            {typeof state === 'object' && (
+              <IssueCancelBtn type="button" onClick={handleNavigateBackDelay}>
+                취소
+              </IssueCancelBtn>
+            )}
+          </IssueBtnBox>
         </Box>
       </IssueArticle>
 
@@ -123,7 +125,7 @@ const IssueForm = () => {
               Date <AiOutlineSetting />
             </IssueInfoTitle>
             <div>{date || '비어 있음'}</div>
-            {isDate && <input type="datetime-local" onChange={handleDateChange} />}
+            {isDate && <IssueInfoDate type="datetime-local" onChange={handleDateChange} />}
           </IssueInfoItem>
 
           <IssueInfoItem>
@@ -132,13 +134,13 @@ const IssueForm = () => {
             </IssueInfoTitle>
             <div>{status}</div>
             {isStatus && (
-              <select onChange={handleSelect} defaultValue={status}>
+              <IssueStatusSelect onChange={handleSelect} defaultValue={status}>
                 {STATUS_INITIAL.map((v) => (
                   <option key={v} value={v}>
                     {v}
                   </option>
                 ))}
-              </select>
+              </IssueStatusSelect>
             )}
           </IssueInfoItem>
         </Box>
@@ -148,56 +150,93 @@ const IssueForm = () => {
 };
 
 const IssueFormComponent = styled.form`
-  height: 100vh;
   display: flex;
-  justify-content: center;
+  width: 90%;
+  margin: auto;
 `;
 
 const IssueArticle = styled.div`
-  width: 900px;
+  flex-grow: 1;
+  margin-right: 10px;
   border-right: 1px solid #d9d9d9;
 `;
 
 const Box = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 90%;
   margin-top: 42px;
 `;
 
 const IssueTitleInput = styled.input`
-  width: 860px;
-  height: 30px;
-  padding: 4px;
+  padding: 15px 0 15px 18px;
+  border: none;
+  border-bottom: 1px solid grey;
+  font-size: 1.5rem;
+  :focus {
+    outline: none;
+  }
+  ::placeholder {
+    font-size: 1.5rem;
+  }
 `;
 
 const IssueDescArea = styled.textarea`
-  width: 862px;
   height: 220px;
-  padding: 4px;
   margin: 10px 0;
+  padding: 20px;
+  border-radius: 7px;
+  font-size: 1rem;
+  font-family: arial, Helvetica, sans-serif;
+  :focus {
+    outline: none;
+  }
+  ::placeholder {
+    font-size: 1rem;
+  }
 `;
 
-const IssueSubmitBtn = styled.button`
-  width: 140px;
-  height: 32px;
+const IssueCancelBtn = styled.button`
+  width: 125px;
   margin: 8px 8px 8px 0;
-  border: 1px solid black;
+  padding: 8px 0px;
+  border: none;
   border-radius: 5px;
+  background-color: #f26e22;
+  color: white;
   cursor: pointer;
 `;
 
+const IssueSubmitBtn = styled.button`
+  width: 125px;
+  margin: 8px 8px 8px 0;
+  padding: 8px 0px;
+  border: none;
+  border-radius: 5px;
+  background-color: #21bf48;
+  color: white;
+  cursor: pointer;
+`;
+
+const IssueBtnBox = styled.div`
+  display: flex;
+`;
+
 const IssueInfo = styled.div`
-  width: 326px;
+  flex-grow: 1;
+  margin-left: 10px;
   padding: 10px 0;
   line-height: 24px;
+  flex-grow: 1;
 `;
 
 const IssueInfoItem = styled.div`
-  margin: 10px 0;
-  padding: 10px 0;
-  border-bottom: 1px solid #d9d9d9;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding-left: 24px;
+  margin: 10px 0;
+  padding: 10px 0px;
+  border-bottom: 1px solid #d9d9d9;
 `;
 
 const IssueInfoTitle = styled.div`
@@ -205,6 +244,37 @@ const IssueInfoTitle = styled.div`
   cursor: pointer;
   :hover {
     color: skyblue;
+  }
+`;
+
+const IssueInfoDate = styled.input`
+  margin-top: 10px;
+  animation: fadeIn ease-in-out 1s;
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+`;
+
+const IssueStatusSelect = styled.select`
+  margin-top: 10px;
+  padding: 10px 0;
+  border-radius: 5px;
+  animation: fadeIn ease-in-out 1s;
+  :focus {
+    outline: none;
+  }
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
   }
 `;
 
