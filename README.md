@@ -272,13 +272,11 @@
 
   ```jsx
   // pages > IssueViewr.jsx
+  const { state } = useLocation();
+
+  const { title, desc, assignees, dueDate, id, status } = state;
+
   const handleNavigate = () => navigate('/issue/write', { state });
-  const handleDelete = () => {
-    const newIssues = issues.filter((v) => v.id !== id);
-    localStorage.setItem('issues', JSON.stringify(newIssues));
-    setIssues(issues.filter((v) => v.id !== id));
-    navigate('/');
-  };
   ```
 
   <br />
