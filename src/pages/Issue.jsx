@@ -28,7 +28,6 @@ const Issue = () => {
       if (e.target.id !== dragItem.status) {
         const newIssue = { ...dragItem, status: e.target.id };
         const nextIssues = issues.filter((v) => v.status === newIssue.status);
-
         const another = issues.filter((v) => v.status !== newIssue.status).filter((v) => v.status !== dragItem.status);
         if (classNames.includes('first')) {
           nextIssues.unshift(newIssue);
@@ -38,7 +37,6 @@ const Issue = () => {
           nextIssues.splice(+classNames[2], 0, newIssue);
         }
         const result = [...another, ...prevIssues, ...nextIssues];
-        localStorage.setItem('issues', JSON.stringify(result));
         setIssues(result);
       } else {
         if (classNames.includes('first')) {
@@ -52,7 +50,6 @@ const Issue = () => {
         }
         const another = issues.filter((v) => v.status !== dragItem.status);
         const result = [...another, ...prevIssues];
-        localStorage.setItem('issues', JSON.stringify(result));
         setIssues(result);
       }
     }
