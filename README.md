@@ -145,6 +145,8 @@
 
 과제에서 요구한 기능들의 구현 여부 및 Best Practice로 도출된 코드들에 대해 설명합니다.
 
+---
+
 ### Assignment1
 
 - [x] 이슈 목록 보기 기능
@@ -219,6 +221,8 @@
   > 📌 Recoil의 selectorFamily를 활용해 filter 메서드를 추상화하여 중복된 코드를 개선했습니다.  
   > 📌 각 상태에 해당하는 배열을 filtering 한 후 List 컴포넌트에 전달합니다.
 
+---
+
 ### Assignment2
 
 - [x] 이슈 추가 기능
@@ -254,6 +258,8 @@
 
   > 📌 form 안의 내용을 state로 관리하고, onSubmit 이벤트가 발생하면 해당 데이터로 새로운 이슈를 생성해 로컬스토리지에 저장 및 전역 상태를 업데이트 합니다.
   > 📌 미리 작성해둔 INITIAL_SUGGESTIONS 배열을 초기상태로 지정하고, 목록을 클릭하면 클릭한 담당자가 포함되도록 assignees state를 업데이트 합니다.
+
+---
 
 ### Assignment3
 
@@ -400,6 +406,8 @@
   > 📌 write page로 이동할 때 navigate의 두번째 인자로 수정페이지와 글쓰기 페이지를 나누고 있습니다.  
   > 📌 state가 object로 들어온다면 수정 페이지를 띄우고 있습니다.  
   > 📌 수정, 삭제시 결과가 들어있는 새로운 newIssues를 localstorage에 저장하여 데이터를 보관하고 있습니다.
+
+---
 
 ### Assignment5
 
