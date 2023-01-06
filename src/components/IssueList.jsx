@@ -56,7 +56,7 @@ const IssueListComponent = styled.div`
 `;
 
 const IssueListTitle = styled.div`
-  padding: 10px;
+  margin: 10px 10px 0 10px;
   font-weight: 700;
 `;
 
@@ -70,6 +70,7 @@ const IssueLastBlock = styled.div`
   width: 100%;
   height: 100%;
   padding: 5px 0;
+  margin-top: 10px;
 `;
 
 const IssueAddBtn = styled.div`
@@ -77,7 +78,7 @@ const IssueAddBtn = styled.div`
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: 50px;
+  padding: 10px 0;
   background: #f1f3f5;
   border-radius: 0 0 10px 10px;
   cursor: pointer;

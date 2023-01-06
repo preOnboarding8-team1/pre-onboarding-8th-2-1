@@ -24,7 +24,7 @@ const IssueItem = ({ issue, handleOnDragStart }) => {
 const IssueItemComponent = styled.div`
   display: flex;
   flex-direction: column;
-  width: 312px;
+  width: 90%;
   height: 65px;
   padding: 5px;
   margin: 2px 0;
@@ -35,7 +35,6 @@ const IssueItemComponent = styled.div`
   cursor: pointer;
 
   @media (max-width: 768px) {
-    width: 90%;
     margin: 2px auto;
   }
 `;
