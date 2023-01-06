@@ -179,6 +179,8 @@
     };
   ```
 
+    <br />
+
   > 📌 전체 issues 를 localStorage에 저장하고 Recoil Atom 전역 상태로 관리합니다.  
   > 📌 Atom Effect 를 활용해 issueState의 변경이 있을 때마다 localStorage에 접근하여 데이터를 갱신합니다. 반복해서 localStorage에 접근하는 중복 코드를 방지합니다.
 
@@ -212,10 +214,10 @@
   const issues = useRecoilValue(filteredIssueState(status));
   ```
 
+  <br />
+
   > 📌 Recoil의 selectorFamily를 활용해 filter 메서드를 추상화하여 중복된 코드를 개선했습니다.  
   > 📌 각 상태에 해당하는 배열을 filtering 한 후 List 컴포넌트에 전달합니다.
-
-  <br />
 
 ### Assignment2
 
