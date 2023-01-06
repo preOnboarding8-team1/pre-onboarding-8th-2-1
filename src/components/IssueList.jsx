@@ -26,24 +26,37 @@ const IssueList = ({ title, status, handleOnDragOver, handleOnDrop, handleOnDrag
         <></>
       )}
       <IssueLastBlock id={title} className={`last ${issues.length + 1}`} />
-      <IssueAddBtn onClick={handleNavigate}>Add Item</IssueAddBtn>
+      <IssueAddBtn onClick={handleNavigate}>+ Add Item</IssueAddBtn>
     </IssueListComponent>
   );
 };
 
 const IssueListComponent = styled.div`
+  display: flex;
   width: 350px;
   height: 600px;
-  background: #d9d9d9;
+  background: #fff;
   margin: 5px;
-  display: flex;
   flex-direction: column;
   border-radius: 10px;
   overflow: auto;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
+
+  @media (max-width: 768px) {
+    width: 90%;
+    height: 100%;
+    margin: 5px auto;
+  }
+
+  @media (max-width: 480px) {
+    width: 100%;
+    height: 100%;
+    border-radius: 0;
+  }
 `;
 
 const IssueListTitle = styled.div`
-  padding: 10px;
+  margin: 10px 10px 0 10px;
   font-weight: 700;
 `;
 
@@ -57,15 +70,23 @@ const IssueLastBlock = styled.div`
   width: 100%;
   height: 100%;
   padding: 5px 0;
+  margin-top: 10px;
 `;
 
 const IssueAddBtn = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 100%;
-  padding: 12px;
-  box-sizing: border-box;
-  border-top: 1px solid black;
+  padding: 10px 0;
+  background: #f1f3f5;
+  border-radius: 0 0 10px 10px;
   cursor: pointer;
+  &:hover {
+    background: #e9ecef;
+  }
 `;
+
 const IssueItemBlock = styled.div`
   display: flex;
   flex-direction: column;

@@ -46,26 +46,39 @@ const Assignees = () => {
 
 const AssignessComponent = styled.div`
   width: 300px;
+  margin-top: 10px;
   border: 1px solid #d9d9d9;
   border-bottom: none;
   box-sizing: border-box;
+  animation: fadeIn ease-in-out 1s;
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
 `;
 
 const SuggestionsInputBox = styled.div`
-  padding: 10px;
   display: flex;
   justify-content: center;
+  padding: 10px;
 `;
 
 const SuggestionsInput = styled.input`
   width: 250px;
-  padding: 4px 4px;
+  padding: 8px;
   border: 1px solid #d9d9d9;
   border-radius: 5px;
+  :focus {
+    outline: none;
+  }
 `;
 
 const SuggestionsTitle = styled.div`
-  padding: 5px;
+  padding: 10px 0 10px 10px;
   border-bottom: 1px solid #d9d9d9;
   border-top: 1px solid #d9d9d9;
 `;
@@ -85,4 +98,5 @@ const SuggestionsCheck = styled.div`
   justify-content: center;
   align-items: center;
 `;
+
 export default Assignees;

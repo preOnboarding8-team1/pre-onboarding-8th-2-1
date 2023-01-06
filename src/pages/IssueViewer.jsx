@@ -34,14 +34,12 @@ const IssueViewer = () => {
 
         <Desc>{desc}</Desc>
 
-        <div>
-          <Btn type="button" onClick={handleNavigateDelay}>
-            수정
-          </Btn>
-          <Btn type="button" onClick={handleDeleteDelay}>
-            삭제
-          </Btn>
-        </div>
+        <IssueUpdateBtn type="button" onClick={handleNavigateDelay}>
+          수정
+        </IssueUpdateBtn>
+        <IssueDeleteBtn type="button" onClick={handleDeleteDelay}>
+          삭제
+        </IssueDeleteBtn>
       </Box>
     </IssueViewerComponent>
   );
@@ -51,28 +49,50 @@ const IssueViewerComponent = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 90%;
+  margin: auto;
   margin-top: 42px;
 `;
 
 const Box = styled.div`
+  width: 50%;
+  min-width: 277px;
+  max-width: 800px;
   border: 1px solid black;
+  border-radius: 7px;
+  box-shadow: 4px 1px 10px 2px #000000;
 `;
 
 const Title = styled.div`
-  width: 1200px;
   padding: 10px;
   border-bottom: 1px solid black;
+  vertical-align: middle;
 `;
 
 const Desc = styled(Title)`
-  min-height: 432px;
+  min-height: 400px;
   border-bottom: 1px solid black;
 `;
 
-const Btn = styled.button`
+const IssueUpdateBtn = styled.button`
   width: 125px;
-  height: 32px;
-  margin: 8px;
+  margin: 8px 0 8px 8px;
+  padding: 8px 0;
+  border: none;
+  border-radius: 5px;
+  background-color: #21bf48;
+  color: white;
+  cursor: pointer;
+`;
+
+const IssueDeleteBtn = styled.button`
+  width: 125px;
+  margin: 8px 0 8px 8px;
+  padding: 8px 0;
+  border: none;
+  border-radius: 5px;
+  background-color: #f26e22;
+  color: white;
   cursor: pointer;
 `;
 
